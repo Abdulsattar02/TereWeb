@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Web Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ussd-style.css">
+    
+
+
+</head>
+
+<body>
+    <main class="main" >
+        <header class="" id="header">
+            <div class="logo">
+                <img src="./assets/images/logo.png" alt="web logo">
+            </div>
+            <div class="navbar">
+                <a href="#home">Home</a>
+                <a href="#howTereWorks">How tere works</a>
+                <a href="#tereBenefits">Tere benefits</a>
+                <button>Help Center</button>
+            </div>
+
+            <div class="bar-icon">
+                <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </header>
+
+        <!-- ============  HERO SECTION  ============= -->
+
+        <main>
+            <section class="hero-section">
+                <div class="content" data-aos="fade-right">
+                    <h1>DOWNLOAD APP, SAVE MONEY, MAKE FRIENDS!</h1>
+                    <P>Its simple and its free. Play your part in reducing Carbon Footprint and help Mother Nature to
+                        sustain its beauty. So what are you waiting for ?
+                        Lets ride together</P>
+                    <div class="buttons">
+                        <button><img src="./assets/images/play_store.png" alt="play store">DOWNLOAD</button>
+                        <button><img src="./assets/images/app_store.png" alt="app store">DOWNLOAD</button>
+                    </div>
+                </div>
+                <div class="image" data-aos="fade-left">
+                    <img src="./assets/images/banner.png" alt="landing page banner">
+                </div>
+            </section>
+
+<br><br>
+
+<!-- Language Switcher -->
+  <div class="lang-switcher">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('ur')">اردو</button>
+    <button onclick="setLanguage('sd')">سنڌي</button>
+  </div>
+
+
+
+      <br><br>
+      <h1>Simulated USSD Interface</h1>
+
+  <p  data-en="Dial: *123#" 
+     data-ur="ڈائل کریں: *123#"
+     data-sd="ڊائل ڪيو: *123#">Dial: *123#</p>
+
+
+  <select>
+    <option data-en="1. Book Ride" data-ur="1. سواری بُک کریں" data-sd="1. سواري بُڪ ڪريو">1. Book Ride</option>
+    <option data-en="2. Check Fare" data-ur="2. کرایہ چیک کریں" data-sd="2. ڪرایو چيڪ ڪريو">2. Check Fare</option>
+  </select>
+
+  <form>
+    <input placeholder="Enter pickup location"
+           data-en="Enter pickup location"
+           data-ur="پک اپ مقام درج کریں"
+           data-sd="پِڪ اپ هنڌ داخل ڪريو">
+
+    <input placeholder="Enter drop location"
+           data-en="Enter drop location"
+           data-ur="ڈراپ مقام درج کریں"
+           data-sd="ڊراپ هنڌ داخل ڪريو">
+
+    <button 
+      type="submit"
+      data-en="Submit"
+      data-ur="جمع کروائیں"
+      data-sd="موڪليو">Submit</button>
+  </form>
+
+
+  <br><br><br>
+
+
+            <!-- ✅ Add this inside <main> after the HERO SECTION -->
+<section class="fare-estimator-section" id="fareEstimator" style="padding: 40px; background-color: #f9f9f9; text-align: center;">
+    <h2 style="font-size: 32px; margin-bottom: 20px;">Estimate Your Ride Fare</h2>
+    <p style="font-size: 16px;">Enter estimated distance (in kilometers):</p>
+    <input type="number" id="distance" placeholder="Distance in KM" style="padding: 10px; font-size: 16px; width: 200px; margin-top: 10px;">
+    <button onclick="calculateFare()" style="padding: 10px 20px; font-size: 16px; background-color: #01b075; color: white; border: none; margin-left: 10px;">Estimate Fare</button>
+
+    <div id="fareResult" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+
+    <button id="whatsappButton" style="margin-top: 20px; padding: 10px 20px; font-size: 16px; background-color: #25D366; color: white; border: none; display: none;">
+        Book Ride on WhatsApp
+    </button>
+</section>
+
+<br><br>
+
+<!-- SMS Booking Button -->
+<div class="offline-booking">
+    <button onclick="toggleSMSBox()">📴 No Internet? Book via SMS</button>
+  </div>
+  
+  <!-- Hidden SMS Box -->
+  <div id="smsBox" class="sms-box" style="display: none;">
+    <h3>Book Ride via SMS</h3>
+    <p>Send this SMS to <strong>03196637570</strong>:</p>
+    <code>BOOK Ali, Railway Station, Gol Building</code>
+    <br><br>
+    <a href="sms:03196637570?body=BOOK%20Ali,%20Railway%20Station,%20Gol%20Building">
+      <button>📩 Send SMS</button>
+    </a>
+  </div>
+
+
+<br><br><br>
+
+
+
+
+  <div class="traffic-section">
+    <h2>🚦 Simulated Real-Time Traffic</h2>
+
+    <div class="traffic-section">
+      <label for="pickup">Pickup Location:</label>
+      <input type="text" id="pickup" placeholder="e.g., Railway Station">
+  
+      <label for="drop">Drop Location:</label>
+      <input type="text" id="drop" placeholder="e.g., Sindhri Chowk">
+  
+      <button onclick="simulateTraffic()">Check Traffic</button>
+  
+      <div id="trafficResult" class="traffic-result"></div>
+  
+      <iframe
+        id="mapFrame"
+        width="100%"
+        height="300"
+        frameborder="0"
+        style="border:0;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="">
+      </iframe>
+    </div>
+
+
+
+
+            <!-- ============  RECTANGLE SECTION  ============= -->
+
+            <section class="rectangle" data-aos="fade-down" data-aos-duration='800' data-aos-offset='70'>
+                <div class="para">
+                    <p>Let’s go. Get a link
+                        to download the app.</p>
+                </div>
+                <div class="input-field">
+                    <form>
+                        <input type="text" placeholder="Enter mobile phone number">
+                        <button>APPLY TO DRIVE</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============  HOW TERE WORKS SECTION  ============= -->
+
+            <section class="how-tere-works" id="howTereWorks">
+                <div class="heading">
+                    <h1>HOW <span>TERE</span> WORKS</h1>
+                    <p>Download and install the tere app. Enter your phone number and make your user account. when
+                        approved
+                        you may start driving.</p>
+                </div>
+
+                <!-- ======= CONTAINER ======== -->
+                <div class="container">
+                    <div class="b1-3" data-aos="fade-right">
+                        <div class="b1">
+                            <img src="./assets/images/green-circle.png" alt="circle">
+                            <img src="./assets/images/1.png" alt="one">
+                            <h2>REQUEST A RIDE</h2>
+                            <P>Have to reach office or going for shopping ?
+                                Just put your current location and destination and search a ride that suits you</P>
+                        </div>
+                        <div class="b3">
+                            <img src="./assets/images/green-circle.png" alt="circle">
+                            <img src="./assets/images/3.png" alt="three">
+                            <h2>INSTANT NOTIFICATION</h2>
+                            <P>Get instant notifications for your rides and be in contact with fellow riders all the
+                                time
+                            </P>
+                        </div>
+                    </div>
+                    <div class="circle-div">
+                        <div class="circle">
+
+                        </div>
+                    </div>
+                    <div class="b2-4" data-aos="fade-left">
+                        <div class="b2">
+                            <img src="./assets/images/green-circle.png" alt="circle">
+                            <img src="./assets/images/2.png" alt="two">
+                            <h2>POST A RIDE</h2>
+                            <P>Going somewhere but hate to travel alone -
+                                just post your ride details and publish it</P>
+                        </div>
+                        <div class="b4">
+                            <img src="./assets/images/green-circle.png" alt="circle">
+                            <img src="./assets/images/4.png" alt="four">
+                            <h2>CASHLESS PAYMENT</h2>
+                            <P>Payment made easy by using your own Wallet - no more cash to carry</P>
+                        </div>
+                    </div>
+
+                    <img src="./assets/images/tere-benefits-background.png" alt="background mobile image"
+                        class="background-mobile" data-aos="zoom-in">
+
+                </div>
+
+
+                <!-- ======= FOUR DOTS ======== -->
+                <div class="four-dots">
+                    <img src="./assets/images/four-dots.png" alt="four dots">
+                </div>
+
+            </section>
+
+
+            <!-- ============  TERE BENEFITS  ============= -->
+
+            <section class="tere-benefits" id="tereBenefits">
+                <div class="heading">
+                    <h1><span>TERE</span> BENEFITS</h1>
+                </div>
+
+                <!-- ==============   CARD ONE   ==============-->
+                <div class="card card-one " id="card1" data-aos="fade-right">
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="h2-01">01.</h2>
+                            <h2 class="h2-heading">Flexible working hours</h2>
+                        </div>
+                        <p>You can decide when, and how much
+                            time you want to drive.</p>
+                    </div>
+                    <div class="image">
+                        <img src="./assets/images/card1-image.png" alt="card1 image">
+                    </div>
+                </div>
+
+                <!-- ==============   CARD TWO   ==============-->
+                <div class="card card-two" id="card2" data-aos="fade-left">
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="h2-01">02.</h2>
+                            <h2 class="h2-heading">Earnings Well</h2>
+                        </div>
+                        <p>By driving with tere you can
+                            earn more.</p>
+                    </div>
+                    <div class="image">
+                        <img src="./assets/images/card2-image.png" alt="card2 image">
+                    </div>
+                </div>
+
+                <!-- ==============   CARD THREE   ==============-->
+                <div class="card card-three" id="card3" data-aos="fade-right">
+                    <div class="content">
+                        <div class="heading">
+                            <h2 class="h2-01">03.</h2>
+                            <h2 class="h2-heading">Customer support 24/7</h2>
+                        </div>
+                        <p>Tere is a local service provider and we are proud to support you in your local language. We
+                            are
+                            proud to be at your service 24/7!</p>
+                    </div>
+                    <div class="image">
+                        <img src="./assets/images/card3-image.png" alt="card3 image">
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+
+  
+
+
+        <footer data-aos="fade-up" data-aos-duration='800'>
+            <div class="upper">
+                <div class="footer-img">
+                    <img src="./assets/images/logo-black.png" alt="footer web logo">
+                </div>
+                <div class="para">
+                    <h3>Be Our Friend</h3>
+                    <p>3, Season Park, Jakarta support@foodyar.co,id 021 - 1111 - 2222</p>
+                </div>
+                <div class="para">
+                    <h3>Be Our Friend</h3>
+                    <p>3, Season Park, Jakarta support@foodyar.co,id 021 - 1111 - 2222</p>
+                </div>
+                <div class="btn">
+                    <button><img src="./assets/images/play_store.png" alt="play store">DOWNLOAD</button>
+                    <button><img src="./assets/images/app_store.png" alt="app store">DOWNLOAD</button>
+                </div>
+            </div>
+            <div class="lower">
+                <p>&lt/&gt Developed By Abdul Sattar</p>
+                <p>&lt/&gt just a Project Of Technology Managment</p> 
+                <p>All Rights Reserved tere by Codematics 2025</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 140,
+            duration: 800,
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
